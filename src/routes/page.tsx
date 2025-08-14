@@ -10,8 +10,14 @@ import "./index.css";
 
 const appSyncUrl = process.env.APP_SYNC_URL ?? "";
 const appSyncApiKey = process.env.APP_SYNC_API_KEY;
-const appSyncClient = createAppSyncClient(appSyncUrl, appSyncApiKey);
-const leadGateway = createLeadGateway(appSyncClient);
+const appSyncRegion = process.env.APP_SYNC_REGION ?? 'us-east-1';
+const allyId = process.env.ALLY_ID ?? '';
+const appSyncClient = createAppSyncClient(
+  appSyncUrl,
+  appSyncApiKey,
+  appSyncRegion,
+);
+const leadGateway = createLeadGateway(appSyncClient, allyId);
 
 const Index = () => {
 	const [formData, setFormData] = useState<Record<string, any>>({});

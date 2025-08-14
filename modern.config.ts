@@ -10,6 +10,8 @@ export default defineConfig({
     globalVars: {
       'process.env.APP_SYNC_URL': process.env.APP_SYNC_URL ?? '',
       'process.env.APP_SYNC_API_KEY': process.env.APP_SYNC_API_KEY ?? '',
+      'process.env.APP_SYNC_REGION': process.env.APP_SYNC_REGION ?? '',
+      'process.env.ALLY_ID': process.env.ALLY_ID ?? '',
     },
   },
   plugins: [
