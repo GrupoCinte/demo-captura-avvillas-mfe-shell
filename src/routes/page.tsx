@@ -1,8 +1,10 @@
 import { Helmet } from "@modern-js/runtime/head";
-import { useState } from "react";
-import Provider from "provider";
+import { useState, useRef } from "react";
+import Provider, { type ProviderRef } from "provider";
 import StatusMessage from "../components/StatusMessage";
 import DataPreview from "../components/DataPreview";
+import ApiResponsePreview from "../components/ApiResponsePreview";
+import ConfirmationModal from "../components/ConfirmationModal";
 import { createAppSyncClient } from "../services/appSyncClient";
 import { createLeadGateway } from "../services/leadGateway";
 import { useLeadSubmission } from "../services/useLeadSubmission";
@@ -10,19 +12,37 @@ import "./index.css";
 
 const appSyncUrl = process.env.APP_SYNC_URL ?? "";
 const appSyncApiKey = process.env.APP_SYNC_API_KEY;
-const appSyncRegion = process.env.APP_SYNC_REGION ?? 'us-east-1';
-const allyId = process.env.ALLY_ID ?? '';
+const appSyncRegion = process.env.APP_SYNC_REGION ?? "us-east-1";
+const allyId = process.env.ALLY_ID ?? "";
 const appSyncClient = createAppSyncClient(
-  appSyncUrl,
-  appSyncApiKey,
-  appSyncRegion,
+	appSyncUrl,
+	appSyncApiKey,
+	appSyncRegion
 );
 const leadGateway = createLeadGateway(appSyncClient, allyId);
 
 const Index = () => {
 	const [formData, setFormData] = useState<Record<string, any>>({});
-	const { isLoading, error, success, submitLead, handleError, clearError } =
-		useLeadSubmission(leadGateway);
+	const providerRef = useRef<ProviderRef>(null);
+
+	const handleSuccess = () => {
+		if (providerRef.current) {
+			providerRef.current.resetForm();
+		}
+	};
+
+	const {
+		isLoading,
+		error,
+		success,
+		apiResponse,
+		showConfirmationModal,
+		submitLead,
+		handleError,
+		clearError,
+		closeConfirmationModal,
+		clearApiResponse,
+	} = useLeadSubmission(leadGateway, handleSuccess);
 
 	const handleFormDataChange = (data: Record<string, any>) => {
 		setFormData(data);
@@ -73,6 +93,7 @@ const Index = () => {
 							)}
 
 							<Provider
+								ref={providerRef}
 								onLeadSubmit={submitLead}
 								onLeadError={handleError}
 								onFormDataChange={handleFormDataChange}
@@ -80,11 +101,24 @@ const Index = () => {
 						</div>
 
 						<aside className="form-sidebar">
-							<DataPreview data={formData} />
+							<div className="sidebar-content">
+								<DataPreview data={formData} />
+								<ApiResponsePreview
+									response={apiResponse}
+									isLoading={isLoading}
+								/>
+							</div>
 						</aside>
 					</div>
 				</div>
 			</section>
+
+			<ConfirmationModal
+				isOpen={showConfirmationModal}
+				onClose={closeConfirmationModal}
+				title="¡Envío exitoso!"
+				message="Los datos han sido enviados correctamente al servidor. Puede ver la respuesta en el panel lateral."
+			/>
 		</>
 	);
 };

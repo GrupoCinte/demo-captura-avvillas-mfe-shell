@@ -6,6 +6,8 @@ body {
 		Oxygen, Ubuntu, Cantarell, sans-serif;
 	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 	line-height: 1.6;
+	overflow-x: hidden;
+	min-height: 100vh;
 }
 
 p {
@@ -18,59 +20,107 @@ p {
 	box-sizing: border-box;
 }
 
-/* Main Content */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+	.container-box {
+		padding: 0 0.5rem;
+	}
+
+	.form-intro {
+		padding: 0 0.25rem;
+	}
+
+	.form-intro h3 {
+		font-size: 1.375rem;
+		line-height: 1.1;
+	}
+
+	.form-intro p {
+		font-size: 0.875rem;
+	}
+
+	.form-content {
+		padding: 0.875rem;
+		border-radius: 10px;
+	}
+
+	.data-preview-container {
+		padding: 0.75rem;
+	}
+
+	.sidebar-content {
+		gap: 0.875rem;
+	}
+}
+
 .main-content {
 	flex: 1;
 }
 
-/* Form Section */
 .form-section {
 	background: #f8fafc;
-	padding: 4rem 0;
+	padding: 1.5rem 0;
+	width: 100%;
+	overflow-x: hidden;
 }
 
 .container-box {
 	max-width: 1200px;
 	margin: 0 auto;
-	padding: 0 2rem;
+	padding: 0 0.75rem;
+	width: 100%;
 }
 
 .form-intro {
 	text-align: center;
-	margin-bottom: 3rem;
+	margin-bottom: 1.5rem;
+	padding: 0 0.5rem;
 }
 
 .form-intro h3 {
-	font-size: 2.5rem;
+	font-size: 1.5rem;
 	color: #1a202c;
-	margin: 0 0 1rem 0;
+	margin: 0 0 0.75rem 0;
 	font-weight: 600;
+	line-height: 1.2;
+	word-wrap: break-word;
 }
 
 .form-intro p {
-	font-size: 1.125rem;
+	font-size: 0.9rem;
 	color: #4a5568;
 	max-width: 600px;
 	margin: 0 auto;
+	line-height: 1.5;
+	word-wrap: break-word;
 }
 
 .form-container {
 	display: grid;
-	grid-template-columns: 1fr 400px;
-	gap: 3rem;
+	grid-template-columns: 1fr;
+	gap: 1rem;
 	align-items: start;
-	max-width: 1400px;
+	width: 100%;
 	margin: 0 auto;
+	min-width: 0;
 }
 
 .form-content {
 	background: white;
-	border-radius: 20px;
-	padding: 3rem;
-	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+	border-radius: 12px;
+	padding: 1rem;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 	border: 1px solid #e2e8f0;
-	overflow: hidden;
 	position: relative;
+	min-width: 0;
+	width: 100%;
+	overflow-wrap: break-word;
+	word-break: break-word;
 }
 
 .form-content::before {
@@ -86,7 +136,16 @@ p {
 .form-sidebar {
 	display: flex;
 	flex-direction: column;
-	gap: 1.5rem;
+	width: 100%;
+	min-width: 0;
+}
+
+.sidebar-content {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	width: 100%;
+	min-width: 0;
 }
 
 .info-card {
@@ -154,15 +213,17 @@ p {
 	font-weight: 500;
 }
 
-/* Data Preview Component */
 .data-preview-container {
 	background: white;
 	border-radius: 12px;
-	padding: 1.5rem;
+	padding: 0.875rem;
 	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 	border: 1px solid #e2e8f0;
 	transition: all 0.3s ease;
 	animation: slideInRight 0.5s ease-out;
+	width: 100%;
+	min-width: 0;
+	overflow: hidden;
 }
 
 .data-preview-container:hover {
@@ -274,8 +335,15 @@ p {
 	background: #1a1a1a;
 	max-height: 300px;
 	overflow-y: auto;
+	overflow-x: hidden;
+	word-break: break-all;
+	overflow-wrap: break-word;
+	white-space: pre-wrap;
 	scrollbar-width: thin;
 	scrollbar-color: #4a5568 #2d3748;
+	width: 100%;
+	min-width: 0;
+	box-sizing: border-box;
 }
 
 .json-content::-webkit-scrollbar {
@@ -299,10 +367,13 @@ p {
 .json-line {
 	display: block;
 	animation: fadeInUp 0.3s ease-out;
+	word-break: break-all;
+	overflow-wrap: break-word;
 }
 
 .json-key {
 	color: #60a5fa;
+	word-break: break-all;
 }
 
 .json-colon {
@@ -311,6 +382,8 @@ p {
 
 .json-value {
 	color: #34d399;
+	word-break: break-all;
+	overflow-wrap: break-word;
 }
 
 .json-comma {
@@ -320,6 +393,8 @@ p {
 .json-placeholder {
 	color: #6b7280;
 	font-style: italic;
+	word-break: break-all;
+	overflow-wrap: break-word;
 }
 
 .data-stats {
@@ -351,7 +426,6 @@ p {
 	border-radius: 12px;
 }
 
-/* Animations */
 @keyframes slideInRight {
 	from {
 		opacity: 0;
@@ -393,10 +467,44 @@ p {
 	}
 }
 
-/* Tablet responsiveness */
-@media (min-width: 769px) {
+@media (min-width: 768px) {
+	.container-box {
+		padding: 0 1.5rem;
+	}
+
+	.form-section {
+		padding: 2.5rem 0;
+	}
+
+	.form-intro {
+		margin-bottom: 2rem;
+		padding: 0;
+	}
+
+	.form-intro h3 {
+		font-size: 2rem;
+	}
+
+	.form-intro p {
+		font-size: 1.125rem;
+	}
+
+	.form-container {
+		gap: 1.5rem;
+		max-width: 1200px;
+	}
+
+	.form-content {
+		padding: 1.5rem;
+		border-radius: 16px;
+	}
+
+	.sidebar-content {
+		gap: 1.5rem;
+	}
+
 	.data-preview-container {
-		padding: 2rem;
+		padding: 1.25rem;
 	}
 
 	.data-preview-header h4 {
@@ -413,20 +521,89 @@ p {
 	}
 }
 
-/* Desktop responsiveness */
-@media (min-width: 1025px) {
+@media (min-width: 1024px) {
+	.container-box {
+		padding: 0 2rem;
+	}
+
+	.form-section {
+		padding: 3rem 0;
+	}
+
+	.form-intro {
+		margin-bottom: 2.5rem;
+	}
+
+	.form-intro h3 {
+		font-size: 2.25rem;
+	}
+
+	.form-container {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 380px);
+		gap: 2rem;
+		max-width: 1400px;
+	}
+
+	.form-content {
+		padding: 2.5rem;
+		border-radius: 20px;
+		min-width: 0;
+	}
+
+	.form-sidebar {
+		min-width: 0;
+	}
+
+	.data-preview-container {
+		padding: 1.75rem;
+	}
+
 	.json-content {
 		font-size: 0.875rem;
 		max-height: 500px;
 	}
 
-	.data-preview-container {
+	.sidebar-content {
 		position: sticky;
 		top: 2rem;
+		min-width: 0;
+	}
+
+	.form-content .identification-grid,
+	.form-content .personal-info-grid {
+		grid-template-columns: 1fr 1fr;
+		gap: 1.5rem;
 	}
 }
 
-/* Status Messages */
+@media (min-width: 1200px) {
+	.container-box {
+		padding: 0 2.5rem;
+	}
+
+	.form-section {
+		padding: 4rem 0;
+	}
+
+	.form-intro h3 {
+		font-size: 2.5rem;
+	}
+
+	.form-container {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+		gap: 2.5rem;
+	}
+
+	.form-content {
+		padding: 3rem;
+		min-width: 0;
+	}
+
+	.data-preview-container {
+		padding: 2rem;
+	}
+}
+
 .status-message {
 	padding: 1rem 1.25rem;
 	margin-bottom: 1.5rem;
@@ -480,7 +657,6 @@ p {
 	border-radius: 2px;
 }
 
-/* Estilos específicos para el formulario en el shell */
 .form-content .lead-form {
 	max-width: none !important;
 }
@@ -580,7 +756,6 @@ p {
 	border-left: 4px solid #667eea;
 }
 
-/* Mejoras adicionales de espaciado y tipografía */
 .form-content .lead-form label {
 	color: #374151;
 	font-weight: 500;
@@ -614,7 +789,74 @@ p {
 	box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1) !important;
 }
 
-/* Mejoras específicas para la sección de autorización */
+.form-content * {
+	box-sizing: border-box;
+	max-width: 100%;
+	min-width: 0;
+	overflow-wrap: break-word;
+	word-break: break-word;
+}
+
+.form-content .container {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	min-width: 0;
+}
+
+.form-content .content {
+	width: 100%;
+	min-width: 0;
+}
+
+.form-content .lead-form {
+	width: 100%;
+	min-width: 0;
+	max-width: 100%;
+}
+
+.form-content .lead-form fieldset {
+	width: 100%;
+	min-width: 0;
+	max-width: 100%;
+	box-sizing: border-box;
+}
+
+.form-content .lead-form input,
+.form-content .lead-form select {
+	width: 100%;
+	min-width: 0;
+	max-width: 100%;
+	box-sizing: border-box;
+}
+
+.form-content .identification-grid,
+.form-content .personal-info-grid,
+.form-content .form-sections-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1rem;
+	min-width: 0;
+	width: 100%;
+}
+
+.form-content .form-group {
+	min-width: 0;
+	width: 100%;
+}
+
+.form-content .form-actions {
+	width: 100%;
+	min-width: 0;
+}
+
+.form-content .submit-button {
+	width: 100%;
+	min-width: 0;
+	max-width: 100%;
+	box-sizing: border-box;
+}
+
 .form-content .authorization-group {
 	border-radius: 12px;
 	padding: 1.5rem;
@@ -631,7 +873,6 @@ p {
 	line-height: 1.5;
 }
 
-/* Estilos específicos para la nueva autorización simplificada */
 .form-content .authorization-simple {
 	background: #f1f5f9;
 	border: 1px solid #cbd5e0;
@@ -662,7 +903,6 @@ p {
 	outline-color: #667eea;
 }
 
-/* Estilos específicos para la sección de identificación mejorada */
 .form-content .identification-fieldset {
 	background: #f8fafc;
 	border: 1px solid #cbd5e0;
@@ -682,61 +922,357 @@ p {
 	color: #00695c;
 }
 
-/* Diseño para tablets y pantallas medianas */
-@media (max-width: 1024px) and (min-width: 769px) {
-	.form-container {
-		grid-template-columns: 1fr 350px;
-		gap: 2rem;
-	}
+.modal-backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+	padding: 0.5rem;
+	animation: fadeIn 0.3s ease-out;
+}
 
-	.form-content {
-		padding: 2.5rem;
-	}
+.modal-content {
+	background: white;
+	border-radius: 12px;
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+	max-width: 500px;
+	width: 100%;
+	max-height: 95vh;
+	overflow-y: auto;
+	animation: slideInUp 0.3s ease-out;
+	position: relative;
+}
 
-	.form-content .lead-form fieldset {
-		padding: 1.75rem;
-	}
+.confirmation-modal .modal-header {
+	padding: 1.5rem 1.5rem 1rem 1.5rem;
+	text-align: center;
+	border-bottom: 1px solid #e5e7eb;
+	position: relative;
+}
 
-	.form-content .form-sections-grid {
-		gap: 1.25rem;
+.confirmation-modal .success-icon {
+	font-size: 2.5rem;
+	margin-bottom: 0.75rem;
+	animation: bounceIn 0.6s ease-out;
+}
+
+.confirmation-modal .modal-header h3 {
+	color: #16a34a;
+	font-size: 1.5rem;
+	font-weight: 600;
+	margin: 0;
+}
+
+.modal-close-button {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	background: none;
+	border: none;
+	font-size: 1.5rem;
+	color: #6b7280;
+	cursor: pointer;
+	width: 2rem;
+	height: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 4px;
+	transition: all 0.2s ease;
+}
+
+.modal-close-button:hover {
+	background: #f3f4f6;
+	color: #374151;
+}
+
+.modal-body {
+	padding: 1rem 1.5rem;
+	text-align: center;
+}
+
+.modal-body p {
+	color: #4a5568;
+	line-height: 1.6;
+	margin: 0;
+	font-size: 0.95rem;
+}
+
+.modal-footer {
+	padding: 1rem 1.5rem 1.5rem 1.5rem;
+	text-align: center;
+}
+
+.btn {
+	padding: 0.875rem 1.5rem;
+	border-radius: 8px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	border: none;
+	font-size: 0.95rem;
+	width: 100%;
+}
+
+.btn-primary {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	color: white;
+	box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+}
+
+.btn-primary:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:active {
+	transform: translateY(0);
+}
+
+@keyframes slideInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px) scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
 	}
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-	.form-container {
-		grid-template-columns: 1fr;
-		gap: 2rem;
-		max-width: 100%;
+@keyframes bounceIn {
+	0% {
+		opacity: 0;
+		transform: scale(0.3);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.05);
+	}
+	70% {
+		transform: scale(0.9);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@media (min-width: 768px) {
+	.modal-backdrop {
+		padding: 1rem;
 	}
 
-	.form-content {
-		padding: 2rem;
+	.modal-content {
 		border-radius: 16px;
+		max-height: 90vh;
 	}
 
-	.form-content .lead-form fieldset {
-		padding: 1.5rem;
+	.confirmation-modal .modal-header {
+		padding: 2rem 2rem 1rem 2rem;
+	}
+
+	.confirmation-modal .success-icon {
+		font-size: 3rem;
 		margin-bottom: 1rem;
 	}
 
-	.form-content .form-sections-grid {
-		gap: 1rem;
+	.modal-body {
+		padding: 1rem 2rem;
 	}
 
-	.form-content .identification-grid {
-		grid-template-columns: 1fr;
-		gap: 1rem;
-	}
-
-	.form-content .submit-button {
-		width: 100%;
-		max-width: none;
-		padding: 1rem;
+	.modal-body p {
 		font-size: 1rem;
 	}
 
-	.form-intro h3 {
-		font-size: 2rem;
+	.modal-footer {
+		padding: 1rem 2rem 2rem 2rem;
+	}
+
+	.btn {
+		width: auto;
+		font-size: 1rem;
+		padding: 0.75rem 1.5rem;
+	}
+}
+
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+	padding: 0.5rem;
+}
+
+.modal-overlay .modal-content {
+	background: white;
+	border-radius: 8px;
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+	max-width: 500px;
+	width: 100%;
+	max-height: 95vh;
+	overflow-y: auto;
+	position: relative;
+}
+
+.modal-header {
+	padding: 1rem 1.5rem;
+	border-bottom: 1px solid #e5e7eb;
+	position: relative;
+}
+
+.modal-header h3 {
+	color: #2d3748;
+	font-size: 1.1rem;
+	font-weight: 600;
+	margin: 0;
+}
+
+.modal-close {
+	position: absolute;
+	top: 0.75rem;
+	right: 1rem;
+	background: none;
+	border: none;
+	font-size: 1.5rem;
+	color: #6b7280;
+	cursor: pointer;
+	padding: 0.25rem;
+	line-height: 1;
+}
+
+.modal-close:hover {
+	color: #374151;
+}
+
+.modal-overlay .modal-body {
+	padding: 1.5rem;
+}
+
+.authorization-paragraph {
+	margin-bottom: 1.5rem;
+	font-weight: 500;
+	color: #374151;
+}
+
+.terms-section {
+	margin-bottom: 1.5rem;
+}
+
+.terms-section h4 {
+	font-size: 1rem;
+	font-weight: 600;
+	color: #1f2937;
+	margin: 0 0 0.75rem 0;
+}
+
+.terms-section p {
+	font-size: 0.9rem;
+	line-height: 1.6;
+	color: #4b5563;
+	text-align: left;
+	margin: 0;
+}
+
+.modal-overlay .modal-footer {
+	padding: 1rem 1.5rem;
+	border-top: 1px solid #e5e7eb;
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+.btn-accept,
+.btn-cancel {
+	width: 100%;
+	padding: 0.875rem 1.5rem;
+	border-radius: 8px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	border: none;
+	font-size: 0.95rem;
+}
+
+.btn-accept {
+	background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+	color: white;
+	box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+}
+
+.btn-accept:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+}
+
+.btn-cancel {
+	background: #f3f4f6;
+	color: #374151;
+	border: 1px solid #d1d5db;
+}
+
+.btn-cancel:hover {
+	background: #e5e7eb;
+	border-color: #9ca3af;
+}
+
+@media (min-width: 768px) {
+	.modal-overlay {
+		padding: 1rem;
+	}
+
+	.modal-overlay .modal-content {
+		border-radius: 12px;
+		max-height: 90vh;
+	}
+
+	.modal-header {
+		padding: 1.5rem 2rem;
+	}
+
+	.modal-header h3 {
+		font-size: 1.25rem;
+	}
+
+	.modal-close {
+		top: 1rem;
+		right: 1.5rem;
+	}
+
+	.modal-overlay .modal-body {
+		padding: 2rem;
+	}
+
+	.terms-section h4 {
+		font-size: 1.125rem;
+	}
+
+	.terms-section p {
+		font-size: 1rem;
+	}
+
+	.modal-overlay .modal-footer {
+		padding: 1.5rem 2rem;
+		flex-direction: row;
+		justify-content: flex-end;
+	}
+
+	.btn-accept,
+	.btn-cancel {
+		width: auto;
+		font-size: 1rem;
+		padding: 0.75rem 1.5rem;
 	}
 }

@@ -63,7 +63,7 @@ const DataPreview: React.FC<DataPreviewProps> = ({ data }) => {
 						</code>
 					) : (
 						<span className="json-placeholder">
-							{`{\n  // Los datos aparecerán aquí\n  // mientras completas el formulario\n}`}
+							{`{\n  "message": "Los datos aparecerán mientras completas el formulario"\n}`}
 						</span>
 					)}
 				</pre>
