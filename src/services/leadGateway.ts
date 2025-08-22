@@ -65,7 +65,7 @@ export class LeadGateway {
 	async sendLead(data: LeadFormData): Promise<CreatePersonaResponse> {
 		const input: CreatePersonaInput = {
 			aliado: this.allyId,
-			identificacion: data.idNumber,
+			identificacion: `${data.idType}-${data.idNumber}`,
 			primerNombre: data.firstName,
 			segundoNombre: data.secondName,
 			primerApellido: data.firstLastName,
