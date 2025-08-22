@@ -5,6 +5,7 @@ import StatusMessage from "../components/StatusMessage";
 import DataPreview from "../components/DataPreview";
 import ApiResponsePreview from "../components/ApiResponsePreview";
 import ConfirmationModal from "../components/ConfirmationModal";
+import ErrorModal from "../components/ErrorModal";
 import { createAppSyncClient } from "../services/appSyncClient";
 import { createLeadGateway } from "../services/leadGateway";
 import { useLeadSubmission } from "../services/useLeadSubmission";
@@ -37,10 +38,13 @@ const Index = () => {
 		success,
 		apiResponse,
 		showConfirmationModal,
+		showErrorModal,
+		errorType,
 		submitLead,
 		handleError,
 		clearError,
 		closeConfirmationModal,
+		closeErrorModal,
 		clearApiResponse,
 	} = useLeadSubmission(leadGateway, handleSuccess);
 
@@ -118,6 +122,13 @@ const Index = () => {
 				onClose={closeConfirmationModal}
 				title="¡Envío exitoso!"
 				message="Los datos han sido enviados correctamente al servidor. Puede ver la respuesta en el panel lateral."
+			/>
+
+			<ErrorModal
+				isOpen={showErrorModal}
+				onClose={closeErrorModal}
+				message={error || ""}
+				errorType={errorType}
 			/>
 		</>
 	);
